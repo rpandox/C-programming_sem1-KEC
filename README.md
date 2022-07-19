@@ -12,7 +12,7 @@ LABORATORY SESSON 1 - Basic Input Output
             # a program which requests a user to enter a weight in kg. The program converts it in pounds (kg = 2.2 pounds)
         three
             # a program to read three numbers x, y and z to compute the values of a, b and c given by:
-                a) a = x+|y -z|     b)  b = sin^-1(√((x + y)/2))    c) c = (x-z)^4/3
+                a) a = x+|y -z|     b)  b = sin^-1(√((x^2 + y^2)/2))    c) c = (x-z)^4/3
         four
             # a program to accept temperature in Fahrenheit and convert it into degrees Celsius
         five
