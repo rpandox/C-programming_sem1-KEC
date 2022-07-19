@@ -20,3 +20,17 @@ LABORATORY SESSON 1 - Basic Input Output
             # a program to accept temperature in Fahrenheit and convert it into degrees Celsius
         five
             # a program to read the radius of a circle and to compute its area and circumference. Use a symbolic constant to define the value of π.
+
+
+LABORATORY SESSON 2 - Selective Structures
+        one
+            # a program that reads a co-ordinate point of rectangle coordinate system and displays the
+            the appropriate message after checking where the point lies on the co-ordinate system.
+        two 
+            # a program to find the taxable amount of an employee.
+
+                a. No tax up to 1,00,000 per annual income
+                b. 15% tax for 1,00,000 to 1,75,000 per annual income
+                c. 25% tax for greater than 1,75,000 per annual income
+        three
+            # a program to read a positive integer n and check weather a number is odd or even using switch case
