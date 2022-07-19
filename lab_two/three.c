@@ -1,0 +1,3 @@
+/*
+a program to read a positive integer n and check weather a number is odd or even using switch case
+*/
