@@ -143,3 +143,21 @@ LABORATORY SESSON 6 -  Recursive Functions
         # a program to calculate the sum of the digits of given integer up to single digit using recursion.
     five
         # a program to convert the decimal number given by the user into binary using recursion.
+
+
+
+LABORATORY SESSON 7 -  Arrays (1D and 2D)
+
+
+
+    one
+        # a program to read ‘n’ numbers and to sort them in the ascending order.
+    
+    two
+        # a program to read the numbers in an array and reverse the order of the elements.
+
+    three
+        # a program to find the transpose of a given matrix.
+
+    four
+        # a program to read two matrices of numbers and to find their product. Use 2D-array to represent matrices and use a function to multiply them.
