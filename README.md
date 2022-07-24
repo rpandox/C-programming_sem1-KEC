@@ -215,3 +215,17 @@ LABORATORY SESSON 10 -  Structures using Functions and Pointers
 
     three
         # a program to input name, post and salary of 5 employees from main() function and pass to structure type user defined function(arguments of this function should also be a structure type). This function returns structure variable which keeps the record of only those employees whose salary is greater than 10,000. This modified record is also displayed from main() function.
+
+
+
+LABORATORY SESSON 11 -  Files
+
+
+    one
+        # a program to read the characters from user until the user enters comma character (,) and store it in a file. Display the content stored in a file on the screen.
+    
+    two
+        # a program that writes something in the source file, copies the content of the source file to the destination file and displays the content in the destination file on the screen.
+
+    three
+        # a program to continuously read name, age and salary of a worker and write it into a file until user confirms to end. Then read n from user and display the nth record in the file. Details of worker must be represented by a structure.
