@@ -122,3 +122,24 @@ LABORATORY SESSON 5 - Functions
 
     four
         # a program to swap the values of two numbers.
+
+
+
+LABORATORY SESSON 6 -  Recursive Functions
+
+
+
+    one
+        # a program to find the sum of natural numbers up to the number given by the user using recursion.
+    
+    two
+        # a program to find the factorial of the given number using
+        recursion.
+
+    three
+        # a program to display the Fibonacci series (0 1 1 2 3 5 8 ..... up to given number of terms) using recursion.
+
+    four
+        # a program to calculate the sum of the digits of given integer up to single digit using recursion.
+    five
+        # a program to convert the decimal number given by the user into binary using recursion.
