@@ -185,3 +185,18 @@ LABORATORY SESSON 8 -  Strings and Pointers
 
     six
         # a program to illustrate the concept of pointer to pointer.
+
+
+
+LABORATORY SESSON 9 -  Structures
+
+
+
+    one
+        # a program to create a structure Length to store length in feet & inches and read two lengths and display their sum and difference.
+    
+    two
+        # a program to create a structure in C to store the name of a batsman, runs scored, number of dismissals and batting average. In the program, read the data(name, runs and no. of dismissals) of five players and display the batting average of the player whose name is entered by the user. Batting average is given by total runs/total no. of dismissals.
+
+    three
+        # a program to create a structure Student to store the name of student, roll number & marks and read the details of five students and display the name and roll no. of the student with highest marks.
