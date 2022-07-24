@@ -101,3 +101,24 @@ LABORATORY SESSON 4 - Iterative Structures
             1234321                                GRAMM
            123454321                                RAM
             ......                                   A
+
+
+    
+LABORATORY SESSON 5 - Functions
+
+
+
+    one
+        # a program to create a user defined function that finds the factorial of a number entered by the user which takes argument. The result must be displayed in the main function.
+    
+    two
+        # a program to create a number of user defined functions that takes arguments to find the areas of rectangle and circle. The result must be displayed from main.
+
+    three
+        # a program to calculate the permutation and combination for given n and r. The permutation and combination are defined for given n and r as:
+            P(n, r) = n!/(n-r)!
+            C(n, r) = P(n,r)/r!
+            Define a function factorial, P and C to calculate above requirements.
+
+    four
+        # a program to swap the values of two numbers.
