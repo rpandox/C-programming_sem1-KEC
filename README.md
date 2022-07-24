@@ -1,6 +1,15 @@
 # lab_sem1-KEC
+<<<<<<< HEAD
 This is the Laboratory sesson  for KEC SEM-1 
 
+=======
+<<<<<<< HEAD
+This is the Laboratory sesson  for KEC SEM-1 
+
+=======
+This is the Labora tory sesson  for KEC SEM-1 
+>>>>>>> 3b9450224d31c89b9939752737d7c8c463b5c0b4
+>>>>>>> 86f3c96ba27c6834fe7528f524ed9f4d7f33ac09
 it is done using (C-programming Language)
 
 
