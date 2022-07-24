@@ -161,3 +161,27 @@ LABORATORY SESSON 7 -  Arrays (1D and 2D)
 
     four
         # a program to read two matrices of numbers and to find their product. Use 2D-array to represent matrices and use a function to multiply them.
+
+
+
+LABORATORY SESSON 8 -  Strings and Pointers
+
+
+
+    one
+        # a program to read two strings in main and compare them using user defined function. Display appropriate message from main.
+    
+    two
+        # a program to read a line of text and to count the number of vowels, consonants, white spaces, digits and special characters in it. Use a character array to store the line.
+
+    three
+        # a program to read ‘n’ words and use user defined function to arrange and display them in the alphabetical order.
+
+    four
+        # a program to find the larger of two numbers using the concept of function and pointers.
+    
+    five
+        # a program to illustrate the concept of pointer expressions.
+
+    six
+        # a program to illustrate the concept of pointer to pointer.
