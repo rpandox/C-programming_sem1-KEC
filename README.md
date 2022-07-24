@@ -200,3 +200,18 @@ LABORATORY SESSON 9 -  Structures
 
     three
         # a program to create a structure Student to store the name of student, roll number & marks and read the details of five students and display the name and roll no. of the student with highest marks.
+
+
+
+LABORATORY SESSON 10 -  Structures using Functions and Pointers
+
+
+
+    one
+        # a program to create a structure address(with members Province number, District, town) and person(with members name, phone no., address) to store data of 5 people. Display the people with the searched Province number. Use function.
+    
+    two
+        # a program to read name and age as the two members of a structure named Students for 5 different students. Make two functions, first function to sort the data according to their name alphabetically and second function to sort the data according to their age. Display the result of both functions from main.
+
+    three
+        # a program to input name, post and salary of 5 employees from main() function and pass to structure type user defined function(arguments of this function should also be a structure type). This function returns structure variable which keeps the record of only those employees whose salary is greater than 10,000. This modified record is also displayed from main() function.
