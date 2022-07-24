@@ -73,3 +73,31 @@ LABORATORY SESSON 3 - Selective Structures (2nd part)
 
         three 
             # a program to find the roots of a quadratic equation ax + bx + c = 0. The program must first show whether the roots are real and unequal, real and equal or complex conjugates. In case of complex roots, the roots must be displayed in the form  x + yi , x - yi .
+
+
+
+LABORATORY SESSON 4 - Iterative Structures
+
+
+
+    one 
+        # a program to take positive integers as input until 0 is entered and compute the average of even numbers entered by the user.
+
+    two
+        # a program to check if a number is triangular or not. (e.g. 3 = 1+2, 6 = 1+2+3, 10 = 1+2+3+4,.....)
+
+    three
+        # a program to display the given sequence up to nth term.
+            1, 2, 5, 10, 17, 26 ....... nth term
+
+    four 
+        #  a program to compute the sum of the given series up to nth term.
+            1 – x^2 + x^4 – x^6 + x^8 - ......... nth term
+    five
+        # a program to display following the patterns:
+            a) 1                             b) PROGRAMMING
+              121                                ROGRAMMIN
+             12321                                OGRAMMI
+            1234321                                GRAMM
+           123454321                                RAM
+            ......                                   A
