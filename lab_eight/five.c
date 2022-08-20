@@ -1,0 +1,3 @@
+/*
+a program to illustrate the concept of pointer expressions.
+*/

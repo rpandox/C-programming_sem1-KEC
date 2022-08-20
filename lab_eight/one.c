@@ -1,0 +1,4 @@
+/*
+a program to read two strings in main and compare them using user defined function. Display 
+          appropriate message from main.
+*/

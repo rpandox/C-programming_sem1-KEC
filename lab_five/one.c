@@ -1,0 +1,4 @@
+/*
+a program to create a user defined function that finds the factorial of a number entered 
+          by the user which takes argument. The result must be displayed in the main function.
+*/

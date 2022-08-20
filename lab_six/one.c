@@ -1,0 +1,4 @@
+/*
+a program to find the sum of natural numbers up to the number given by the user 
+          using recursion.
+*/

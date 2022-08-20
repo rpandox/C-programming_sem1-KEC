@@ -1,0 +1,4 @@
+/*
+a program to calculate the sum of the digits of given integer up to single digit 
+          using recursion.
+*/
