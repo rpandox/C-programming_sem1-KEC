@@ -1,6 +1,8 @@
+/*
+This is for Employees Pages
+*/
 
-
-int emp_login_page()
+int emp_login_page()        //employee Login
 {
    // login page
 
@@ -9,6 +11,7 @@ int emp_login_page()
     emp x;
     FILE *a;
     a = fopen("emp.dat","rb");
+    rewind(a);
     if (a == NULL)
     {
         system("clear");
@@ -20,19 +23,15 @@ int emp_login_page()
     login_page_username(ent_user);
     login_page_pass(ent_pass);
 
-    do
+    while(fread(&x,sizeof(emp),1,a))
     {
         
 
         if (atoi(ent_user) == x.emp_id )
         break;
-        if (feof(a) == 0)
-        {
-            printf("\t\t\tPERSON NOT FOUND\n");
-            getchar();
-            return 0;
-        }
-    } while (!feof(a));
+
+        
+    } 
     
     if(!strcmp(x.password,ent_pass))
     {
@@ -53,7 +52,7 @@ int emp_login_page()
     
 }
 
-int desk_employee_main_page()
+int desk_employee_main_page()   //For Desk employee
 {
     system("clear");
     int n;
@@ -63,7 +62,7 @@ int desk_employee_main_page()
     scanf("%i",&n);
     return n;
 }
-int service_employee_main_page()
+int service_employee_main_page()    //for service Employees
 {
     system("clear");
     int n;
@@ -99,7 +98,7 @@ int employee()
     {
         top1:
         system("clear");
-        ch = service_employee_main_page();
+        ch = desk_employee_main_page();
         switch (ch)
         {
             case 1:
@@ -133,10 +132,12 @@ int employee()
         {
             case 1:
                 room_to_be_cleaned();
+                getchar();
                 goto top2;
                 break;
             case 2:
                 checklist();
+                getchar();
                 goto top2;
                 break;
             case 3:

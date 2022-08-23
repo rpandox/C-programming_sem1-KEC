@@ -1,5 +1,7 @@
-
-int administrator_main_page()
+/*
+This is Pages for the Administrator
+*/
+int administrator_main_page()   //Main PAGE FOR ADMINISTRATOR
 {
     system("clear");
     int n;
@@ -10,7 +12,7 @@ int administrator_main_page()
     scanf("%i",&n);
     return n;
 }
-int admin_login_page()
+int admin_login_page()          //LOGIN PAGE FOR ADMINISTRATOR
 {
     // login page
 
@@ -59,9 +61,10 @@ int adminn()
         }
     
     }
+    top:
     administrator_choice = administrator_main_page();
 
-    top:
+    
     switch (administrator_choice)
     {
     case 1:
@@ -85,11 +88,13 @@ int adminn()
     case 4:
         // show guestlog 
         show_gue_log();
+        getchar();
         goto top;
         break;
     case 5:
         // show total gain/loss
         profit_loss();
+        getchar();
         goto top;
         break;
     case 6:
@@ -101,7 +106,7 @@ int adminn()
         return 0;
         break;
     default:
-        break;
+        goto top;
     }
 
     return 0;

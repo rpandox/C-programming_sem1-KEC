@@ -22,13 +22,6 @@ typedef struct admin
     char password[10];
 } admin;
 
-//this ia a structure for the date
-typedef struct date
-{
-    int day;
-    int month;
-    int year;
-}date;
 
 
 //this is astructure for Guest
@@ -36,13 +29,12 @@ typedef struct gue
 {
     char gue_name[50];
     long long gue_number;
-    date day;
     int stay_day;
-    
+    int in_out ;             //for checked in 1 for checked out 2
     int room_no;
 }gue;
 
-
+int gc,ec ;
 //Page Header/Footer For Needed Parts 
 void page_header()
 {
@@ -113,9 +105,44 @@ void login_page_username(char str[10])
 }
 void login_page_pass(char str[10])
 {
-    char ent_password[10];
+    char ent_password[10],ch;
+    int i = 0;
+
     printf("\tPASSWORD: ");
-    scanf("%s",ent_password);
+
+
+    //THIS WAS FOR HIDING PASSWORD BUT NO CONIO ON MAC
+    /*fflush(stdin);
+    while(1) 
+    {
+        ch =getch();
+        if (ch == 13)
+        {
+            ent_password[i] = '\0';
+            break;
+        }
+        else if (ch == 8)
+        {
+            if (i>0)
+            {
+                printf("\b \b");
+                continue;
+            }
+        }
+
+        else if (ch == 9 || ch == 32)
+        continue;
+
+        else 
+        { 
+            ent_password[i] = ch;
+            i++;  
+            printf("*");
+        }
+        fflush(stdin); 
+    }
+    */
+   scanf("%s",ent_password);
     printf("\n");
     printf("\n");
     printf("\n");
@@ -165,28 +192,31 @@ void all_emp()      //This is the body for Seeing all employees
     }
     
     rewind(p);
-    while(!feof(p))
-    {
-        fflush(stdin);
-        fread(&data, sizeof(emp),1,p);
     printf("|\t\t\t\t\t\t\t\t\t |\n");
     printf("|\t\t\t\t\t\t\t\t\t |\n");
     printf("|\t\t\t\tALL EMPLOYEES\t\t\t\t |\n");
+    while(fread(&data, sizeof(emp),1,p))
+    {
+        fflush(stdin);
+        
+    
     printf("|\t\t\t\t\t\t\t\t\t |\n");
     printf("|\t\t\t\t\t\t\t\t\t |\n");
     printf("|\tSN.%i \t\t\t\t\t\t\t\t |\n",++i);
     printf("|\t\t\t\t\t\t\t\t\t |\n");
-    printf("|\tNAME:\t\t%s\t\t\t\t\t |\n",data.emp_name);
+    printf("|\tNAME:\t\t%s\t\t\t\t\t\t |\n",data.emp_name);
     printf("|\tPHONE:\t\t%lli\t\t\t\t\t |\n",data.emp_phone);
     printf("|\tTYPE:\t\t%i\t\t\t\t\t\t |\n",data.type);
-    printf("|\tSALARY:\t\t%li\t\t\t\t\t |\n",data.emp_sal);
-    printf("|\tEMP-ID:\t\t%i\t\t\t\t\t\t\t |\n",data.emp_id);
-    printf("|\tEMP-PASS:\t%s\t\t\t\t\t |\n",data.password);
+    printf("|\tSALARY:\t\t%li\t\t\t\t\t\t |\n",data.emp_sal);
+    printf("|\tEMP-ID:\t\t%i\t\t\t\t\t\t |\n",data.emp_id);
+    printf("|\tEMP-PASS:\t%s\t\t\t\t\t\t |\n",data.password);
     }
+    ec =i;
     fclose(p);
 }
 void see_all_emp()
 {
+    system("clear");
     page_header();
     all_emp();
     page_footer();
@@ -199,14 +229,21 @@ void add_emp()      //This is the code for Adding Employees
 	FILE *add,*c;
     emp dat , check;
     int i; char m;
-	add = fopen("emp.dat","ab");
-    if (add == NULL)
-    {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
-        exit(1);
-    }
+    
+	c = fopen("emp.dat","rb");
+            if (c == NULL)
+            {
+             c = fopen("emp.dat","wb");
+        
+            if (c == NULL)
+            {
+                system("clear");
+                printf("\t\t\t\tERROR!!\t\t\t\t");
+                printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+                exit(1);
+            }
+            }
+            rewind(c);
     system("clear");
 	//do{
         printf(" \n");
@@ -231,43 +268,63 @@ void add_emp()      //This is the code for Adding Employees
         printf("\tSALARY: ");
         scanf("%li",&dat.emp_sal);
         printf("\n");
+        
+        
         EMP_ID:
         fflush(stdin);
         printf("\tEMPLOYEE ID: ");
         scanf("%i",&dat.emp_id);
-        do
-        {
-            c = fopen("emp.dat","rb");
-            if (c == NULL)
-            {
-                system("clear");
-                printf("\t\t\t\tERROR!!\t\t\t\t");
-                printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
-                exit(1);
-            }
+        rewind(c);
+        while(fread(&check, sizeof(emp),1,c))
+        { 
             if (!feof(c))
             break;
-            rewind(c);
-            fread(&check, sizeof(emp),1,c);
+            
+            
             if (dat.emp_id == check.emp_id)
             {
                 printf("\tID TAKEN\n\tEnter again");
                 goto EMP_ID;
             }
-            fclose(c);
-        }while(!feof(c));
+            
+        }
+        fseek(c,0,SEEK_END);
+        fclose(c);
         fflush(stdin); 
         printf("\n");       
         printf("\tPASSWORD: ");
         scanf("%s",dat.password);
         printf("\n");
+        
+        add = fopen("emp.dat","ab");
         fseek(add, 0, SEEK_END);
+        if (add == NULL)
+        {
+            system("clear");
+            printf("\t\t\t\tERROR!!\t\t\t\t");
+            printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+            exit(1);
+        }
+        fseek(add,0,SEEK_END);
         fwrite(&dat,sizeof(emp),1,add);
+        fclose(add);
+        system("clear");
+        see_all_emp();
+        system("clear");
        // fflush(stdin);
 		//printf("Do you want to add more employee?(y\\n):");
 		//scanf("%c",&m);
 	//}while(m != 'n');
     
+}
+void fired_msg()
+{
+    system("clear");
+    printf(" ___________________________\n");
+    printf("|\t\t\t    |\n");
+    printf("|\t   FIRED\t    |\n");
+    printf("|___________________________|\n");
+    getchar();
 }
 void fire_emp()     //This is the code for Fireing Employees
 
@@ -299,7 +356,7 @@ void fire_emp()     //This is the code for Fireing Employees
     printf("\t\tFire Employee\n");
     printf("\t       ---------------\n");
     fflush(stdin);
-    printf("\tEMP-ID");
+    printf("\tEMP-ID : ");
     scanf("%d",&id);
 	
     neww = fopen("emp1.dat","wb");
@@ -310,6 +367,7 @@ void fire_emp()     //This is the code for Fireing Employees
         printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
         exit(1);
     }
+    rewind(old);
 	while(fread(&x,sizeof(emp),1,old))
 	{
 		if(id != x.emp_id)
@@ -321,7 +379,7 @@ void fire_emp()     //This is the code for Fireing Employees
 	fclose(neww);
 	remove("emp.dat");
 	rename("emp1.dat","emp.dat");
-	
+	fired_msg();
 }
 void gue_log()      //This is For seeing The people who Have visited this palce
 {
@@ -336,26 +394,35 @@ void gue_log()      //This is For seeing The people who Have visited this palce
         printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
         exit(1);
     }
-    while(!feof(g))
-    {
-        fread(&x,sizeof(gue),1,g);
-        printf("|\t\t\t\t\t\t\t\t\t |\n");
+    rewind(g);
+    printf("|\t\t\t\t\t\t\t\t\t |\n");
         printf("|\t\t\t\t\t\t\t\t\t |\n");
         printf("|\t\t\t\tGUEST LOG\t\t\t\t |\n");
+    while(fread(&x,sizeof(gue),1,g))
+    {
+        
+        
         printf("|\t\t\t\t\t\t\t\t\t |\n");
         printf("|\t\t\t\t\t\t\t\t\t |\n");
-        printf("|\tSN.1 \t\t\t\t\t\t\t\t |\n");
+        printf("|\tSN.%d \t\t\t\t\t\t\t\t |\n",++i);
         printf("|\t\t\t\t\t\t\t\t\t |\n");
-        printf("|\tNAME:\t\t%s\t\t\t\t |\n",x.gue_name);
+        printf("|\tNAME:\t\t%s\t\t\t\t\t\t |\n",x.gue_name);
         printf("|\tPHONE:\t\t%lli\t\t\t\t\t |\n",x.gue_number);
-        printf("|\tROOM NO\t\t%i\t\t\t\t\t |\n",x.room_no);
-        printf("|\tDAYS-STAYED:\t%i\t\t\t\t |\n",x.stay_day);
+        printf("|\tROOM NO\t\t%i\t\t\t\t\t\t |\n",x.room_no);
+        printf("|\tDAYS-STAYED:\t%i\t\t\t\t\t\t |\n",x.stay_day);
+        if (x.in_out == 1)
+        printf("|\tNOT CHECKED OUT\t\t\t\t\t\t\t |\n");
+        if (x.in_out == 2)
+        printf("|\tCHECKED OUT\t\t\t\t\t\t\t |\n");
         printf("|\tPRICE:\t\t%li\t\t\t\t\t\t |\n",(long)x.stay_day*2000);
         printf("|\t\t\t\t\t\t\t\t\t |\n");
     }
+    gc = i;
+    fclose(g);
 }
 void show_gue_log()
 {
+    system("clear");
     page_header();
     gue_log();
     page_footer();
@@ -363,6 +430,7 @@ void show_gue_log()
 }
 void profit_loss()  // This is for Profit Loss Calculation
 {
+    system("clear");
     long tot_emp_sal = 0,tot_gue_gain = 0,g_l;
     time_t t;
     t = time(NULL);
@@ -381,19 +449,19 @@ void profit_loss()  // This is for Profit Loss Calculation
     }
     rewind(e);
     rewind(g);
-    while(!feof(e))
+    while(fread(&y,sizeof(emp),1,e))
     {
-        fread(&y,sizeof(emp),1,e);
         tot_emp_sal += (long)y.emp_sal ;
     }
 
-    while(!feof(g))
+    while(fread(&x,sizeof(gue),1,g))
     {
-        fread(&x,sizeof(gue),1,g);
         tot_gue_gain +=(long)(x.stay_day * 2000);
         
     }
     g_l = tot_gue_gain - tot_emp_sal;
+    system("clear");
+    system("clear");
     printf(" \n");
     printf("\n");
     printf("\t\t\tDate: %d-%d-%d\n",tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900);
@@ -461,12 +529,12 @@ long bill_body(gue b)
     t = time(NULL);
     struct tm tm = *localtime(&t);
 
-    printf("|\tBill No : 000\t\t\t\tDate: %d-%d-%d \t |\n",tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900);
+    printf("|\tBill No : %0.3i\t\t\t\tDate: %d-%d-%d \t |\n",gc,tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900);
     printf("|\tName:%s\t\t\tMobile:%lli\t |\n",b.gue_name,b.gue_number);
     printf("|\t\t\t\t\t\t\t\t\t |\n");
     printf("|\t\t\t\t\t\t\t\t\t |\n");
-    printf("| \t\t\t\tDays Booked\tPrice Per Day\tTotal\t |\n");
-    printf("| \t\t\t\t%i\t\t%i\t\t%li\t |\n",b.stay_day,2000,(long)(b.stay_day*2000));
+    printf("| \t\tDays Booked\tPrice Per Day\tTotal\t\t\t |\n");
+    printf("| \t\t%i\t\t%i\t\t%li\t\t\t |\n",b.stay_day,2000,(long)(b.stay_day*2000));
     printf("|\t\t\t\t\t\t\t\t\t |\n");
 
     return b.stay_day*2000;
@@ -482,12 +550,24 @@ void bill_bottom(long p)
 
 int bill (gue a)
 {
+    int p = 0;
+    if (a.in_out == 1)
+    {
     system("clear");
     int p;
     bill_header();
     p = bill_body(a);
     bill_bottom(p);
     getchar();
+    return p;
+    }
+    else
+    {
+        system("clear");
+        printf("\n\n\n\n\n\n");
+        printf("ALREADY CHECKED OUT");
+        printf("\n\n\n\n\n\n");
+    }
     return p;
 }
 
@@ -500,36 +580,30 @@ void check_in()     //This is for checking in the guests
     t = time(NULL);
     struct tm tm = *localtime(&t);
     FILE *g;
-    g = fopen("guelog.dat","wb");
-    if (g == NULL)
-    {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
-        exit(1);
-    }
-    fclose(g);
-    g = fopen("guelog.dat","ab");
+   
+     g = fopen("guelog.dat","ab");
     if (g == NULL)
     {
         g = fopen("guelog.dat","wb");
         if (g == NULL)
         {
-            system("clear");
-            printf("\t\t\t\tERROR!!\t\t\t\t");
-            printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
-            exit(1);
+        system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        exit(1);
         }
     }
+    fseek(g,0,SEEK_END);
+    
+
     printf(" \n");
     printf("\n");
     printf("\t\t\tDate: %d-%d-%d\n",tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900);
     printf("\n");
     printf("\t\tCheck-in Guest\n");
     printf("\t       --------------\n");
-    printf("\tDATE(dd mm yyyy): ");
-    scanf("%i %i %i",&x.day.day,&x.day.month,&x.day.year);
     printf("\n");
+    fflush(stdin);
     printf("\tNAME: ");
     scanf("%s",x.gue_name);
     printf("\n");
@@ -542,17 +616,22 @@ void check_in()     //This is for checking in the guests
     printf("\tDAYS ROOM BOOKED FOR :");
     scanf("%i",&x.stay_day);
     printf("\n");
+    x.in_out = 1;
+    gc ++;
     fwrite(&x,sizeof(gue),1,g);
     fclose(g);
+    system("clear");
+    gue_log();
+    system("clear");
 
 }
 void check_out()    //This is for Checking out the guest and Generating the bill
 {
     system("clear");
     long tbill;
-    gue x;
+    gue x,y;
     long long ph;
-    FILE *g, *rm;
+    FILE *g, *rm,*ng;
     time_t t;
     t = time(NULL);
     struct tm tm = *localtime(&t);
@@ -562,10 +641,11 @@ void check_out()    //This is for Checking out the guest and Generating the bill
     printf("\n");
     printf("\t\tCheck-out Guest\n");
     printf("\t       --------------\n");
+    fflush(stdin);
     printf("\tPHONE: ");
     scanf("%lli",&ph);
     printf("\n");
-    g = fopen("guelog.dat","ab");
+    g = fopen("guelog.dat","rb");
     if (g == NULL)
     {
         system("clear");
@@ -573,13 +653,15 @@ void check_out()    //This is for Checking out the guest and Generating the bill
         printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
         exit(1);
     }
+
+    rewind(g);
     while(fread(&x,sizeof(gue),1,g))
 	{
 		if( ph== x.gue_number)
 		{
-            printf("press any key\n\n");
-            getchar();
+            
             tbill = bill(x);
+
             break;
 		}
         if (feof(g))
@@ -592,6 +674,11 @@ void check_out()    //This is for Checking out the guest and Generating the bill
             return;
         }
 	}
+    fclose(g);
+    g = fopen("guelog.dat","rb");
+    ng = fopen("nguelog.dat","wb");
+
+
     rm = fopen("room.txt","a");
     if (rm == NULL)
     {
@@ -604,11 +691,35 @@ void check_out()    //This is for Checking out the guest and Generating the bill
         exit(1);
     }
     }
-    fprintf(rm,"%i",x.room_no);
-    printf("press any key");
+    fprintf(rm,"%i ",x.room_no);
+    fclose(rm);
+
+    g = fopen("guelog.dat","rb");
+    ng = fopen("nguelog.dat","wb");
+    
+    if (g == NULL || ng == NULL)
+    {
+        system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        exit(1);
+    }
+    rewind(g);
+    rewind(ng);
+    while(fread(&y,sizeof(gue),1,g))
+    {
+        if (y.gue_number == x.gue_number)
+        y.in_out = 2;
+        fwrite(&y,sizeof(gue),1,ng);
+    }
+
+    
     getchar();
-    tbill = bill(x);
+    
     fclose(g);
+    fclose(ng);
+    remove("guelog.dat");
+    rename("nguelog.dat","guelog.dat");
 }
 
 
@@ -646,6 +757,7 @@ void room_to_be_cleaned()       //This is for seeing the Rooms to be cleaned
         system("clear");
         printf("\t\t\t\tERROR!!\t\t\t\t");
         printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        return;
         exit(1);
     }
     printf(" \n");
@@ -667,7 +779,7 @@ void room_to_be_cleaned()       //This is for seeing the Rooms to be cleaned
     printf("\n");
     getchar();
     fclose(rm);
-    system("clear");
+    
 
 
 }

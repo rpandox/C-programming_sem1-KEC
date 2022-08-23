@@ -6,3 +6,4 @@
 #include "frame.h"
 #include "Administrator.h"
 #include "Employee.h"
+#include <curses.h>
