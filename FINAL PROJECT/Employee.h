@@ -2,7 +2,7 @@
 This is for Employees Pages
 */
 
-int emp_login_page()        //employee Login
+void emp_login_page(int*login)        //employee Login
 {
    // login page
 
@@ -10,14 +10,18 @@ int emp_login_page()        //employee Login
     char ent_user[10],ent_pass[10];
     emp x;
     FILE *a;
+
+    
     a = fopen("emp.dat","rb");
     rewind(a);
     if (a == NULL)
     {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         exit(1);
+fc_reset();
     }
 
     login_page_username(ent_user);
@@ -30,23 +34,28 @@ int emp_login_page()        //employee Login
         if (atoi(ent_user) == x.emp_id )
         break;
 
+
         
     } 
     
+    
+
+        
+        
     if(!strcmp(x.password,ent_pass))
     {
         if (x.type == 1)
         {
-            return 1;
+            *login = 1;
         }
         if (x.type == 2)
         {
-            return 2;
+            *login = 2;
         }
     }
     else 
-    return 0;
-    return 0;
+    *login = 0;
+    *login = 0;
 
 
     
@@ -78,9 +87,12 @@ int service_employee_main_page()    //for service Employees
 int employee()
 {
     int login,ch,i;
+    
+    
+   
  for (i = 0; i < 5; i++)
     {
-        login = emp_login_page();
+        emp_login_page(&login);
         if (login != 0)
         break;
         if (i == 4 && login == 0)
@@ -88,12 +100,14 @@ int employee()
             system("clear");
             printf("\n\n\n\n\n");
             printf("\t\t\t\tYOU ARE AN IMPOSTOR\n");
-            printf("\n\n\n\n\n");
+            printf("\n\n\n\n\n");fflush(stdin);
             getchar();
+            
             exit(2);            
         }
+        
     }
-
+    green();
     if (login == 1)
     {
         top1:

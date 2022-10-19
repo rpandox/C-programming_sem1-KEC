@@ -16,16 +16,40 @@ int admin_login_page()          //LOGIN PAGE FOR ADMINISTRATOR
 {
     // login page
 
+    
     system("clear");
     char username[10],password[10],ent_user[10],ent_pass[10];
-    FILE *a;
+    FILE *a,*b;
+    time_t y,z;
+    double x;
+    b = fopen("wait.dat","rb");
+    if (b == NULL)
+    {
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
+        exit(1);
+fc_reset();
+    }
+     
+    rewind(b);
+    while(fread(&y,sizeof(time_t),1,b))
+    {
+        z = time(NULL);
+        if (difftime(y,z) < (double)(2*60) && difftime(y,z) >= (double)0  )
+        return 3;           //For 5 min Not completed
+
+    }
     a = fopen("admin.txt","r");
     if (a == NULL)
     {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         exit(1);
+fc_reset();
     }
     rewind(a);
     fflush(stdin);
@@ -41,9 +65,12 @@ int admin_login_page()          //LOGIN PAGE FOR ADMINISTRATOR
 
 int adminn()
 {
+    time_t x;
+    FILE *t;
     int administrator_choice,i,login;
     char username[10],password[10];
     
+    blue();
     for (i = 0; i < 5; i++)
     {
         login = admin_login_page();
@@ -51,26 +78,65 @@ int adminn()
         break;
         if (i == 4 && login != 0)
         {
+            x = time(NULL);
+            t = fopen("wait.dat","wb");
+            if (t == NULL)
+            {
+                system("clear");
+                printf("\t\t\t\tERROR!!\t\t\t\t");
+                printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+                exit(3);
+            } 
+            fwrite(&x,sizeof(time_t),1,t);
+            fclose(t);
             system("clear");
             printf("\n\n\n\n\n");
-            printf("\t\t\t\tYOU ARE AN IMPOSTOR\n");
+            printf("\t\t\tYOU ARE AN IMPOSTOR\n");
             printf("\n\n\n\n\n");
+            printf("\t\t WAIT 2 MINUTES TO LOGIN AGAIN");
+            printf("\n\n\n\n\n");
+            fflush(stdin);
             getchar();
-            exit(2);
+            system("clear");
+            x = time(NULL);
+            t = fopen("wait.dat","wb");
+            if (t == NULL)
+            {
+                system("clear");
+                printf("\t\t\t\tERROR!!\t\t\t\t");
+                printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+                
+                exit(3);
+            } 
+            fwrite(&x,sizeof(time_t),1,t);
+            fclose(t);
+            return 1;
+            
              
         }
-    
-    }
+        if (login == 3)
+        {
+            system("clear");
+            printf("\n\n\n\t\tYour 2 min Wait time is not completed!!!\n\n\n");
+            fflush(stdin);
+            getchar();
+            exit(9);
+        }
+        }
+        fc_reset();
     top:
-    administrator_choice = administrator_main_page();
+    green();
 
+    administrator_choice = administrator_main_page();
+    fc_reset();
     
+    green();
     switch (administrator_choice)
     {
     case 1:
         // add employee
+
         add_emp();
-        getchar();
         goto top; 
         break;
     case 2:
@@ -108,6 +174,7 @@ int adminn()
     default:
         goto top;
     }
+    fc_reset();
 
     return 0;
 }

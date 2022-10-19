@@ -22,7 +22,11 @@ typedef struct admin
     char password[10];
 } admin;
 
+typedef struct room
+{
+    int room_no;
 
+}room;
 
 //this is astructure for Guest
 typedef struct gue
@@ -33,6 +37,46 @@ typedef struct gue
     int in_out ;             //for checked in 1 for checked out 2
     int room_no;
 }gue;
+
+
+//FOR COLOURING THE TEXT
+
+void red()
+{
+    printf("\033[1;31m");
+}
+void black()
+{
+    printf(" \033[0;30m");
+}
+void green()
+{
+    printf("\033[0;32m");
+}
+void yellow()
+{
+    printf("\033[1;33m");
+}
+void blue()
+{
+    printf("\033[0;34m");
+}
+void purple()
+{
+    printf("\033[0;35m");
+}
+void cyan()
+{
+    printf("\033[0;36m");
+}
+void white()
+{
+    printf("\033[0;37m");
+}
+void fc_reset()
+{
+    printf("\033[0m");
+}
 
 int gc,ec ;
 //Page Header/Footer For Needed Parts 
@@ -84,6 +128,7 @@ void user_page_body()
 // Login Page For Username And Passwords
 void login_page_username(char str[10])
 {
+    blue();
     char ent_username[10];
     time_t t;
     t = time(NULL);
@@ -147,6 +192,7 @@ void login_page_pass(char str[10])
     printf("\n");
     printf("\n");
     strcpy(str,ent_password);
+    fc_reset();
 
 }
 
@@ -185,10 +231,12 @@ void all_emp()      //This is the body for Seeing all employees
     p = fopen("emp.dat","rb");
     if (p == NULL)
     {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         exit(1);
+fc_reset();
     }
     
     rewind(p);
@@ -275,15 +323,11 @@ void add_emp()      //This is the code for Adding Employees
         printf("\tEMPLOYEE ID: ");
         scanf("%i",&dat.emp_id);
         rewind(c);
-        while(fread(&check, sizeof(emp),1,c))
+        while(fread(&check,sizeof(emp),1,c))
         { 
-            if (!feof(c))
-            break;
-            
-            
             if (dat.emp_id == check.emp_id)
             {
-                printf("\tID TAKEN\n\tEnter again");
+                printf("\n\n\n\n\n\n\tID TAKEN\n\tEnter again\n\n\n");
                 goto EMP_ID;
             }
             
@@ -339,10 +383,12 @@ void fire_emp()     //This is the code for Fireing Employees
 	//check NULL
 	if (old == NULL)
     {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         exit(1);
+fc_reset();
     }
 	
 	fflush(stdin);
@@ -362,10 +408,12 @@ void fire_emp()     //This is the code for Fireing Employees
     neww = fopen("emp1.dat","wb");
     if (neww == NULL)
     {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         exit(1);
+fc_reset();
     }
     rewind(old);
 	while(fread(&x,sizeof(emp),1,old))
@@ -389,10 +437,12 @@ void gue_log()      //This is For seeing The people who Have visited this palce
     g = fopen("guelog.dat","rb");
     if (g == NULL)
     {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         exit(1);
+fc_reset();
     }
     rewind(g);
     printf("|\t\t\t\t\t\t\t\t\t |\n");
@@ -442,10 +492,12 @@ void profit_loss()  // This is for Profit Loss Calculation
     g = fopen("guelog.dat","rb");
     if (e == NULL || g == NULL)
     {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         exit(1);
+fc_reset();
     }
     rewind(e);
     rewind(g);
@@ -456,7 +508,7 @@ void profit_loss()  // This is for Profit Loss Calculation
 
     while(fread(&x,sizeof(gue),1,g))
     {
-        tot_gue_gain +=(long)(x.stay_day * 2000);
+        tot_gue_gain +=(long)(x.stay_day * 5000);
         
     }
     g_l = tot_gue_gain - tot_emp_sal;
@@ -534,7 +586,7 @@ long bill_body(gue b)
     printf("|\t\t\t\t\t\t\t\t\t |\n");
     printf("|\t\t\t\t\t\t\t\t\t |\n");
     printf("| \t\tDays Booked\tPrice Per Day\tTotal\t\t\t |\n");
-    printf("| \t\t%i\t\t%i\t\t%li\t\t\t |\n",b.stay_day,2000,(long)(b.stay_day*2000));
+    printf("| \t\t%i\t\t%i\t\t%li\t\t\t |\n",b.stay_day,5000,(long)(b.stay_day*5000));
     printf("|\t\t\t\t\t\t\t\t\t |\n");
 
     return b.stay_day*2000;
@@ -558,6 +610,7 @@ int bill (gue a)
     bill_header();
     p = bill_body(a);
     bill_bottom(p);
+    fflush(stdin);
     getchar();
     return p;
     }
@@ -567,6 +620,8 @@ int bill (gue a)
         printf("\n\n\n\n\n\n");
         printf("ALREADY CHECKED OUT");
         printf("\n\n\n\n\n\n");
+        fflush(stdin);
+        getchar();
     }
     return p;
 }
@@ -587,10 +642,12 @@ void check_in()     //This is for checking in the guests
         g = fopen("guelog.dat","wb");
         if (g == NULL)
         {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         exit(1);
+fc_reset();
         }
     }
     fseek(g,0,SEEK_END);
@@ -617,7 +674,7 @@ void check_in()     //This is for checking in the guests
     scanf("%i",&x.stay_day);
     printf("\n");
     x.in_out = 1;
-    gc ++;
+    gc++;
     fwrite(&x,sizeof(gue),1,g);
     fclose(g);
     system("clear");
@@ -630,6 +687,7 @@ void check_out()    //This is for Checking out the guest and Generating the bill
     system("clear");
     long tbill;
     gue x,y;
+    room r;
     long long ph;
     FILE *g, *rm,*ng;
     time_t t;
@@ -648,16 +706,18 @@ void check_out()    //This is for Checking out the guest and Generating the bill
     g = fopen("guelog.dat","rb");
     if (g == NULL)
     {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         exit(1);
+fc_reset();
     }
 
     rewind(g);
     while(fread(&x,sizeof(gue),1,g))
 	{
-		if( ph== x.gue_number)
+		if( ph== x.gue_number && x.in_out == 1)
 		{
             
             tbill = bill(x);
@@ -675,34 +735,17 @@ void check_out()    //This is for Checking out the guest and Generating the bill
         }
 	}
     fclose(g);
-    g = fopen("guelog.dat","rb");
-    ng = fopen("nguelog.dat","wb");
-
-
-    rm = fopen("room.txt","a");
-    if (rm == NULL)
-    {
-        rm = fopen("room.txt","w");
-        if (rm == NULL)
-    {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
-        exit(1);
-    }
-    }
-    fprintf(rm,"%i ",x.room_no);
-    fclose(rm);
-
-    g = fopen("guelog.dat","rb");
+  g = fopen("guelog.dat","rb");
     ng = fopen("nguelog.dat","wb");
     
     if (g == NULL || ng == NULL)
     {
-        system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         exit(1);
+fc_reset();
     }
     rewind(g);
     rewind(ng);
@@ -720,7 +763,27 @@ void check_out()    //This is for Checking out the guest and Generating the bill
     fclose(ng);
     remove("guelog.dat");
     rename("nguelog.dat","guelog.dat");
+
+
+    rm = fopen("room.bin","ab");
+    if (rm == NULL)
+    {
+        rm = fopen("room.bin","wb");
+        if (rm == NULL)
+    {
+        red();
+system("clear");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
+        exit(1);
+fc_reset();
+    }
+    }
+    r.room_no = x.room_no;
+    fwrite(&r,sizeof(room),1,rm);
+    fclose(rm);
 }
+  
 
 
 // Body Page for Service Employee
@@ -747,16 +810,17 @@ void room_to_be_cleaned()       //This is for seeing the Rooms to be cleaned
 {
     system("clear");
     FILE *rm;
-    int room;
+    
+    room r;
     time_t t;
     t = time(NULL);
     struct tm tm = *localtime(&t);
-    rm = fopen("room.txt","r");
+    rm = fopen("room.bin","rb");
     if (rm == NULL)
     {
         system("clear");
-        printf("\t\t\t\tERROR!!\t\t\t\t");
-        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t");
+        printf("\t\t\t\tERROR!!\t\t\t\t\n\n");
+        printf("\t\t\tCONTACT DEVELOPER\t\t\t\t\n\n");fflush(stdin);getchar();
         return;
         exit(1);
     }
@@ -768,13 +832,14 @@ void room_to_be_cleaned()       //This is for seeing the Rooms to be cleaned
     printf("\t       ---------------------\n");
     printf("\n");
     printf("\n");
-    do
+    rewind(rm);
+    
+    while (fread(&r,sizeof(room),1,rm))
     {
-        fscanf(rm,"%i ",&room);
-        printf("\tROOM NO :\t %i\t ",room);
+        
+        printf("\tROOM NO :\t %i\t ",r.room_no);
         printf("\n");
-
-    } while (!feof(rm));
+    } 
     printf("\n");
     printf("\n");
     getchar();
@@ -787,7 +852,8 @@ void checklist()                //This is for checking out the Room that have be
 {
     system("clear");
     FILE *old,*new;
-    int room_no,r;
+    int roomno;
+    room r;
     time_t t;
     t = time(NULL);
     struct tm tm = *localtime(&t);
@@ -800,26 +866,26 @@ void checklist()                //This is for checking out the Room that have be
     printf("\n");
     printf("\n");
     printf("\tROOM NO :\t ");
-    scanf("%i",&room_no);
+    scanf("%i",&roomno);
     printf("\n");
     printf("\n");
     printf("\n");
 
-    old = fopen("room.txt","r");
-	new = fopen("nr.txt","w");
-	while(!feof(old))
+    old = fopen("room.bin","rb");
+	new = fopen("nr.bin","wb");
+	while(fread(&r,sizeof(room),1,old))
 	{
-        fscanf(old,"%i",&r);
-		if(room_no == r)
+        
+		if(roomno == r.room_no)
 		{
 			continue;
 		}
-        fprintf(new,"%i",r);
+        fwrite(&r,sizeof(room),1,new);
 	}
 	fclose(old);
 	fclose(new);
-	remove("room.txt");
-	rename("nr.txt","room.txt");
+	remove("room.bin");
+	rename("nr.bin","room.bin");
 	
 }
 

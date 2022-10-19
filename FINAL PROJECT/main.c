@@ -14,27 +14,34 @@ used in this program*/
 
 int user_page()         //the first entry/login page 
 {
+    green();
     system("clear");    // No Conio On Mac
     int n;
     page_header();
     user_page_body();
     page_footer();
+    white();
     scanf("%d",&n);
     return n;
+    fc_reset();
 }
 
  
 int main (void)
 {
-    int user_choice,administrator_choice,a,b;
 
+    int user_choice,administrator_choice,a,b;
+    
     start:
+    fc_reset();
     system("clear");
     user_choice = user_page();
+    green();
     switch (user_choice)
     {
     case 1:             //for Administrator
         a = adminn();
+        fc_reset();
         if (a == 1)
         goto start;
         //if a = 0 break     
@@ -42,6 +49,7 @@ int main (void)
 
     case 2:             //for Employee
         b = employee();
+        fc_reset();
         if (b == 1)
         goto start;
         //if a = 0 break 
@@ -56,8 +64,10 @@ int main (void)
 
     }
     system("clear");
+    red();
     terminate();        //Exit Message
     getchar();
+    fc_reset();
     system("clear");
     return 0;
 
