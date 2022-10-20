@@ -7,13 +7,13 @@ a program to input name, post and salary of 5 employees from main() function and
 */
 
 #include <stdio.h>
-
+#include <string.h>
 
 typedef struct employee
 {
     char name[30];
     char post[30];
-    double salary;
+    long salary;
 }employee;
 
 
@@ -22,7 +22,7 @@ int main()
 {
     employee emp[5];
     employee e [5];
-    int i,l = 0;
+    int i,l;
 
     printf("Enter Data of Five employees\n\n");
     for ( i = 0; i < 5; i++)
@@ -36,7 +36,7 @@ int main()
         gets(emp[i].post);
 
         printf("Enter Salary\n : ");
-        scanf("%ld",&emp[i].salary);
+        scanf("%li",&emp[i].salary);
 
     }
     
@@ -48,7 +48,7 @@ int main()
 
         printf("Post\n : %s\n",e[i].post);
 
-        printf("Salary\n : %ld\n",e[i].salary);
+        printf("Salary\n : %li\n",e[i].salary);
         
     }
     
@@ -58,14 +58,18 @@ int main()
 void empl(employee *emp , int* l,employee * e)
 {
     int i;
+    int li = 0;
     for ( i = 0; i < 5; i++)
     {
         if (emp[i].salary > 10000)
         {
-            e[*l] = emp[i];
-            *l++;
+            strcpy(e[li].name,emp[i].name);
+            strcpy(e[li].post,emp[i].post);    
+            e[li].salary = emp[i].salary;                
+            li++;
         } 
     }
+    *l = li;
     return ;
     
 }
